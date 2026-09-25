@@ -13,7 +13,7 @@ def get_valid_input():                                  # Handle user input and 
     if user_input.lower() == "quit":
         return "quit"
 
-    # Input validation using .isdigit()
+                                                        # Input validation using .isdigit()
     if not user_input.isdigit():
         if user_input.startswith("-") and user_input[1:].isdigit():
             print("Error: Stock quantity cannot be negative. Please try again.")
@@ -31,6 +31,14 @@ def generate_report(total_units, failed_attempts, delivery_history):
     print(f"Total Deliveries Processed: {total_units}")
     print(f"Number of Failed/Rejected Entries: {failed_attempts}")          # Prints the final summary report
     print(f"Transaction History ({len (delivery_history)} entries): {delivery_history}")
+
+
+def save_report(total_units, failed_attempts, delivery_history):
+    with open("inventory.txt", "w") as report_file:
+        report_file.write(f"Total Deliveries Processed: {total_units}\n")
+        report_file.write(f"Number of Failed/Rejected Entries: {failed_attempts}\n")
+        report_file.write(f"Transaction History ({len(delivery_history)} entries): {delivery_history}\n")
+    print("Report saved to 'inventory.txt'.")                               # Saves the output to a txt file
 
 
 def main():
@@ -62,6 +70,7 @@ def main():
 
 
     generate_report(total_inventory, failed_entries, delivery_history)      # Generates the final report
+    save_report(total_inventory, failed_entries, delivery_history)                             # Saves the report to a text file
 
 
 if __name__ == "__main__":
