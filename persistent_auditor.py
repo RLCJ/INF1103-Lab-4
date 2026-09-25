@@ -24,19 +24,20 @@ def get_valid_input():                                  # Handle user input and 
     return int(user_input)
 
 
-def generate_report(total_units, failed_attempts):
+def generate_report(total_units, failed_attempts, delivery_history):
     print("\n" + "=" * 30)
     print("DELIVERY SUMMARY")
     print("=" * 30)
     print(f"Total Deliveries Processed: {total_units}")
     print(f"Number of Failed/Rejected Entries: {failed_attempts}")          # Prints the final summary report
+    print(f"Transaction History ({len (delivery_history)} entries): {delivery_history}")
 
 
 def main():
     total_inventory = 0
     failed_entries = 0
     total_tax_collected = 0.0                                               # Initialize inventory and counters to zero
-
+    delivery_history = []                                                   # List to store the history of deliveries
 
     # 2. Continuous loop
     while True:
@@ -52,15 +53,17 @@ def main():
             continue
 
         # 3. Handle valid delivery
+        delivery_history.append(delivery_amount)  # Store delivery amount and tax in history
         total_inventory = process_delivery(total_inventory, delivery_amount)
         delivery_tax = calculate_tax(delivery_amount)
         total_tax_collected += delivery_tax
 
-        print(f"Accepted: +{delivery_amount} units | Tax: ${delivery_tax:.2f} | Current Total: {total_inventory}")
+        delivery_history.append(delivery_amount)
+        print(f"Accepted: +{delivery_amount} units | Tax (10%): ${delivery_tax:.2f} | Current Total: {total_inventory}")
         # displays 2 decimal places for tax collected
 
 
-    generate_report(total_inventory, failed_entries)
+    generate_report(total_inventory, failed_entries, delivery_history)      # Generates the final report
 
 
 if __name__ == "__main__":
