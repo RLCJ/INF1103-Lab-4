@@ -57,8 +57,6 @@ def main():
         total_inventory = process_delivery(total_inventory, delivery_amount)
         delivery_tax = calculate_tax(delivery_amount)
         total_tax_collected += delivery_tax
-
-        delivery_history.append(delivery_amount)
         print(f"Accepted: +{delivery_amount} units | Tax (10%): ${delivery_tax:.2f} | Current Total: {total_inventory}")
         # displays 2 decimal places for tax collected
 
