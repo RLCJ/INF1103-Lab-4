@@ -49,12 +49,29 @@ def save_inventory(total_units, failed_attempts, delivery_history):
     print("Inventory saved to 'inventory.txt'.")                            # Saves the inventory output to a txt file
 
 
+def load_inventory():
+    try:
+        with open("inventory.txt", "r") as report_file:
+            lines = report_file.readlines()
+            total_units = int(lines[0].split(": ")[1])
+            failed_attempts = int(lines[1].split(": ")[1])
+            delivery_history = eval(lines[2].split(": ")[1])
+        return total_units, failed_attempts, delivery_history
+    except FileNotFoundError:
+        print("No existing inventory found.")
+        return 0, 0, []
+    except Exception as e:
+        print(f"Error loading inventory: {e}")
+        return 0, 0, []
+
+
+
+
 
 def main():
-    total_inventory = 0
     failed_entries = 0
-    total_tax_collected = 0.0                                               # Initialize inventory and counters to zero
-    delivery_history = []                                                   # List to store the history of deliveries
+    total_tax_collected = 0.0                                                   # Initialize inventory and counters to zero
+    total_inventory, failed_attempts, delivery_history = load_inventory()       # Load existing inventory if available
 
     # 2. Continuous loop
     while True:
