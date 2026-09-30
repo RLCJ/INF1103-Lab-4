@@ -1,0 +1,3 @@
+Total Deliveries Processed: 210
+Number of Failed/Rejected Entries: 1
+Transaction History (10 entries): [10, 10, 1, 29, 20, 20, 10, 50, 50, 10]
