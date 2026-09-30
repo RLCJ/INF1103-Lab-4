@@ -41,6 +41,15 @@ def save_report(total_units, failed_attempts, delivery_history):
     print("Report saved to 'inventory.txt'.")                               # Saves the output to a txt file
 
 
+def save_inventory(total_units, failed_attempts, delivery_history):
+    with open("inventory.txt", "w") as report_file:
+        report_file.write(f"Total Deliveries Processed: {total_units}\n")
+        report_file.write(f"Number of Failed/Rejected Entries: {failed_attempts}\n")
+        report_file.write(f"Transaction History ({len(delivery_history)} entries): {delivery_history}\n")
+    print("Inventory saved to 'inventory.txt'.")                            # Saves the inventory output to a txt file
+
+
+
 def main():
     total_inventory = 0
     failed_entries = 0
@@ -69,9 +78,9 @@ def main():
         # displays 2 decimal places for tax collected
 
 
-    generate_report(total_inventory, failed_entries, delivery_history)      # Generates the final report
-    save_report(total_inventory, failed_entries, delivery_history)                             # Saves the report to a text file
-
+    generate_report(total_inventory, failed_entries, delivery_history)                          # Generates the final report
+    save_report(total_inventory, failed_entries, delivery_history)                              # Saves the report to a text file
+    save_inventory(total_inventory, failed_entries, delivery_history)                           # Saves the inventory to a text file
 
 if __name__ == "__main__":
     main()
